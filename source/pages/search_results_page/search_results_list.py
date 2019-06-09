@@ -8,8 +8,7 @@ class SearchResultsList:
         self.driver = driver
         self.timeout = timeout
         self.__results_container_el = None
-        self.__results = None
-        self.initialize_results()
+        self.__results_list = None
 
     @property
     def __results_container(self):
@@ -22,18 +21,24 @@ class SearchResultsList:
         return self.__results_container_el
 
     @property
+    def __results(self):
+        if self.__results_list is None:
+            self.initialize()
+        return self.__results_list
+
+    @property
     def results_len(self):
         if self.__results is not None:
             return len(self.__results)
         return None
 
-    def initialize_results(self):
+    def initialize(self):
         result_els = utils.find_elements(
             self.__results_container,
             SearchResultsListLocators.REPO_RESULT
         )
         if result_els is not None:
-            self.__results = [SearchResultItem(result_el, self.timeout) for result_el in result_els]
+            self.__results_list = [SearchResultItem(result_el, self.timeout) for result_el in result_els]
 
 
 class SearchResultsListLocators:

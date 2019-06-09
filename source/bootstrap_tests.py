@@ -9,3 +9,5 @@ def test_search_for_js(start_web):
         "Hasn't been redirected to search results"
     assert search_results.get_results_len() == 10,\
         "Should be shown 10 results (in the first page)"
+    assert search_results.is_first_page() is True,\
+        "Should be the first page"
