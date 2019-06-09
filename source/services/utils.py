@@ -1,14 +1,22 @@
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
 
 def find_element(search_scope, locator):
-    return search_scope.find_element(*locator)
+    try:
+        element = search_scope.find_element(*locator)
+        return element
+    except NoSuchElementException:
+        return None
 
 
 def find_elements(search_scope, locator):
-    return search_scope.find_elements(*locator)
+    try:
+        elements = search_scope.find_elements(*locator)
+        return elements
+    except NoSuchElementException:
+        return None
 
 
 def wait_and_find_element(search_scope, timeout, locator):

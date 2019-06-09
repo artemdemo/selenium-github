@@ -4,7 +4,7 @@ import pytest
 
 
 @pytest.mark.order1
-def test_search(start_web):
+def test_search_for_js(start_web):
     index_page = start_web
     search_results = index_page.search_for("javascript")
-    assert True, 'ok'
+    assert search_results.there_is_results_container(), "Hasn't been redirected to search results"
