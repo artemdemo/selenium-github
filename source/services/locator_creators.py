@@ -11,3 +11,7 @@ def create_id_locator(id_value):
 
 def create_class_locator(class_value):
     return By.CLASS_NAME, class_value
+
+
+def create_tag_locator(tag_name):
+    return By.TAG_NAME, tag_name
