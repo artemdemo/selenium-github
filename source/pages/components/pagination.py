@@ -1,5 +1,5 @@
-import re
 import services.utils as utils
+import services.elements as elements
 from services.locator_creators import create_class_locator
 
 
@@ -44,12 +44,7 @@ class Pagination:
         )
 
     def is_first_page(self):
-        class_str = self.__prev_page.get_attribute("class")
-        class_str = re.sub('\s{2,}', ' ', class_str.strip())
-        class_list = class_str.split(' ')
-        if 'disabled' in class_list:
-            return True
-        return False
+        return elements.el_has_class(self.__prev_page, 'disabled')
 
 
 class PaginationLocators:
