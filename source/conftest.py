@@ -28,3 +28,14 @@ driver = initialize_driver(site_url)
 def start_web():
     index_page = IndexPage(driver, timeout)
     yield index_page
+
+
+@pytest.fixture(scope='module')
+def manage_driver_and_cleanup():
+    yield driver
+    try:
+        # Here is the place to define garbage collection,
+        # after your tests are done.
+        pass
+    finally:
+        driver.quit()

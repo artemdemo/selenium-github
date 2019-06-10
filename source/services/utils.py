@@ -4,19 +4,11 @@ from selenium.webdriver.support import expected_conditions
 
 
 def find_element(search_scope, locator):
-    try:
-        element = search_scope.find_element(*locator)
-        return element
-    except NoSuchElementException:
-        return None
+    return search_scope.find_element(*locator)
 
 
 def find_elements(search_scope, locator):
-    try:
-        elements = search_scope.find_elements(*locator)
-        return elements
-    except NoSuchElementException:
-        return None
+    return search_scope.find_elements(*locator)
 
 
 def wait_and_find_element(search_scope, timeout, locator):

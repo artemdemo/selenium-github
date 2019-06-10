@@ -32,6 +32,9 @@ class SearchResultsList:
             return len(self.__results)
         return None
 
+    def get_results_el(self):
+        return self.__results_container
+
     def initialize(self):
         result_els = utils.find_elements(
             self.__results_container,
