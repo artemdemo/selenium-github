@@ -1,8 +1,10 @@
+import time
 from pages.github_page import GithubPage
 from services.locator_creators import create_class_locator
 from pages.search_results_page.search_results_list import SearchResultsList
 from pages.search_results_page.search_sort import SearchSort, SortOptions
 from pages.components.pagination import Pagination
+import services.utils as utils
 
 
 class SearchResultsPage(GithubPage):
@@ -20,6 +22,12 @@ class SearchResultsPage(GithubPage):
 
     def sort_by_most_stars(self):
         self.search_sort.select_sort_option(SortOptions.MOST_STARS)
+        # After selecting an option page will not immediately start to reload.
+        # Therefore I'm waiting for 1 second in order to wait to it to kickstart the process.
+        time.sleep(1)
+
+        # And here I'm able to start to load for the RESULTS_CONTAINER
+        utils.wait_for_element_to_load(self.driver, self.timeout, SearchResultsPageLocators.RESULTS_CONTAINER)
         return SearchResultsPage(self.driver, self.timeout)
 
     def get_current_sort_option(self):
