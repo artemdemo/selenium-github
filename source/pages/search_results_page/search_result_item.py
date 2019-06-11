@@ -15,9 +15,7 @@ class SearchResultItem:
             self.__timeout,
             SearchResultItemLocators.TITLE,
         )
-        if self.__title_el is not None:
-            return self.__title_el.text
-        return None
+        return self.__title_el.text
 
 
 class SearchResultItemLocators:

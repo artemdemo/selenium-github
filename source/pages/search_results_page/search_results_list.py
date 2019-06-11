@@ -28,9 +28,7 @@ class SearchResultsList:
 
     @property
     def results_len(self):
-        if self.__results is not None:
-            return len(self.__results)
-        return None
+        return len(self.__results)
 
     def get_results_el(self):
         return self.__results_container
@@ -40,8 +38,7 @@ class SearchResultsList:
             self.__results_container,
             SearchResultsListLocators.REPO_RESULT
         )
-        if result_els is not None:
-            self.__results_list = [SearchResultItem(result_el, self.timeout) for result_el in result_els]
+        self.__results_list = [SearchResultItem(result_el, self.timeout) for result_el in result_els]
 
 
 class SearchResultsListLocators:
