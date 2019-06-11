@@ -1,4 +1,3 @@
-import time
 
 
 def test_search_for_js(start_web, manage_driver_and_cleanup):

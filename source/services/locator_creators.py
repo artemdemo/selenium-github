@@ -2,7 +2,11 @@ from selenium.webdriver.common.by import By
 
 
 def create_data_qa_locator(data_qa_value):
-    return By.XPATH, "//*[@data-qa='%s']" % data_qa_value
+    return create_xpath_locator("//*[@data-qa='%s']" % data_qa_value)
+
+
+def create_xpath_locator(xpath):
+    return By.XPATH, xpath
 
 
 def create_id_locator(id_value):

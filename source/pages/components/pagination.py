@@ -1,6 +1,6 @@
 import services.utils as utils
 import services.elements as elements
-from services.locator_creators import create_class_locator
+from services.locator_creators import create_class_locator, create_xpath_locator
 
 
 class Pagination:
@@ -37,6 +37,13 @@ class Pagination:
         )
         return self.__next_page_el
 
+    def __nth_child(self, child_num):
+        pagination_children_els = utils.find_elements(
+            self.__pagination,
+            create_xpath_locator(".//*")
+        )
+        return pagination_children_els[child_num]
+
     def initialize(self):
         self.__pagination_el = utils.find_element(
             self.driver,
@@ -44,7 +51,10 @@ class Pagination:
         )
 
     def is_first_page(self):
-        return elements.el_has_class(self.__prev_page, 'disabled')
+        first_page_el = self.__nth_child(1)
+        prev_is_disabled = elements.el_has_class(self.__prev_page, 'disabled')
+        first_is_current = elements.el_has_class(first_page_el, 'current')
+        return prev_is_disabled and first_is_current
 
 
 class PaginationLocators:
