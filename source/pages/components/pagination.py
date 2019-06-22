@@ -10,6 +10,7 @@ class Pagination:
         self.__pagination_el = None
         self.__prev_page_el = None
         self.__next_page_el = None
+        self.__current_page_el = None
 
     @property
     def __pagination(self):
@@ -36,6 +37,20 @@ class Pagination:
             PaginationLocators.NEXT_PAGE
         )
         return self.__next_page_el
+
+    @property
+    def __current_page(self):
+        self.__current_page_el = utils.create_element_if_needed(
+            self.__current_page_el,
+            self.__pagination,
+            self.timeout,
+            PaginationLocators.CURRENT_PAGE
+        )
+        return self.__current_page_el
+
+    @property
+    def current_page_number(self):
+        return int(self.__current_page.text, 10)
 
     def __nth_child(self, child_num):
         pagination_children_els = utils.find_elements(
@@ -64,3 +79,4 @@ class PaginationLocators:
     PAGINATION = create_class_locator("pagination")
     PREV_PAGE = create_class_locator("previous_page")
     NEXT_PAGE = create_class_locator("next_page")
+    CURRENT_PAGE = create_class_locator("current")

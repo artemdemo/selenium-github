@@ -1,7 +1,7 @@
 from pages.base_page import BasePage
 from selenium.webdriver.support.ui import WebDriverWait
 from services.locator_creators import create_class_locator
-from services.custom_conditions import element_has_no_css_class
+from services.custom_conditions import element_has_css_class, element_has_no_css_class
 
 
 class GithubPage(BasePage):
@@ -16,6 +16,9 @@ class GithubPage(BasePage):
         return self.topMenu.search_for(text)
 
     def wait_to_load(self):
+        WebDriverWait(self.driver, self.timeout).until(
+            element_has_css_class(GithubPageLocators.LOADER_BAR, "is-loading")
+        )
         WebDriverWait(self.driver, self.timeout).until(
             element_has_no_css_class(GithubPageLocators.LOADER_BAR, "is-loading")
         )

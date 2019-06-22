@@ -19,3 +19,5 @@ def test_search_for_js(start_web, manage_driver_and_cleanup):
         "Shouldn't be the first page"
     assert search_results.get_results_len() == 10, \
         "Should be shown 10 results"
+    assert search_results.current_page_number == 2, \
+        "Should be page number 2"
