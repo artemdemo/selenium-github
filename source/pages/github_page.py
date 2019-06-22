@@ -19,6 +19,9 @@ class GithubPage(BasePage):
     def search_for(self, text):
         return self.__top_menu.search_for(text)
 
+    def go_home(self):
+        return self.__top_menu.go_home()
+
     def wait_to_load(self):
         WebDriverWait(self.driver, self.timeout).until(
             element_has_css_class(GithubPageLocators.LOADER_BAR, "is-loading")

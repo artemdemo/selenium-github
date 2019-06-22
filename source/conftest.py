@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 from configuration import *
 from pages.index_page.index_page import IndexPage
+from pages.github_page import GithubPage
 
 timeout = 5
 
@@ -28,6 +29,8 @@ driver = initialize_driver(site_url)
 def start_web():
     index_page = IndexPage(driver, timeout)
     yield index_page
+    github_page = GithubPage(driver, timeout)
+    github_page.go_home()
 
 
 @pytest.fixture(scope='module')
