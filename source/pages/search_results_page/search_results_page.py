@@ -16,7 +16,8 @@ class SearchResultsPage(GithubPage):
     def current_page_number(self):
         return self.pagination.current_page_number
 
-    def get_results_len(self):
+    @property
+    def results_len(self):
         return self.search_results_list.results_len
 
     def is_first_page(self):
