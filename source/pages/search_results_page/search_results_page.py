@@ -20,6 +20,9 @@ class SearchResultsPage(GithubPage):
     def results_len(self):
         return self.search_results_list.results_len
 
+    def get_nth_result(self, result_number):
+        return self.search_results_list[result_number]
+
     def is_first_page(self):
         return self.pagination.is_first_page()
 

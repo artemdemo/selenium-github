@@ -10,6 +10,9 @@ class SearchResultsList:
         self.__results_container_el = None
         self.__results_list = None
 
+    def __getitem__(self, key):
+        return self.__results_list[key]
+
     @property
     def __results_container(self):
         self.__results_container_el = utils.create_element_if_needed(

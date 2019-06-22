@@ -21,3 +21,15 @@ def test_search_for_js(start_web, manage_driver_and_cleanup):
         "Should be shown 10 results"
     assert search_results.current_page_number == 2, \
         "Should be page number 2"
+
+
+def test_search_for_vuejs(start_web, manage_driver_and_cleanup):
+    index_page = start_web
+    search_results = index_page.search_for("javascript vuejs/vue")
+
+    assert search_results.results_len == 10, \
+        "Should be shown 10 results"
+
+    first_result = search_results.get_nth_result(0)
+    assert first_result.title == "vuejs/vue", \
+        "First result title should be `vuejs/vue`"

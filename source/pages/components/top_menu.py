@@ -17,6 +17,7 @@ class TopMenu:
             self.timeout,
             TopMenuLocators.SEARCH_INPUT,
         )
+        self.search_input_el.clear()
         self.search_input_el.send_keys(text)
         self.search_input_el.send_keys(Keys.RETURN)
         return SearchResultsPage(self.driver, self.timeout)

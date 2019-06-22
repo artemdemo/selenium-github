@@ -8,14 +8,19 @@ class SearchResultItem:
         self.__timeout = timeout
         self.__title_el = None
 
-    def get_title(self):
+    @property
+    def __title(self):
         self.__title_el = utils.create_element_if_needed(
             self.__title_el,
             self.__search_result_el,
             self.__timeout,
             SearchResultItemLocators.TITLE,
         )
-        return self.__title_el.text
+        return self.__title_el
+
+    @property
+    def title(self):
+        return self.__title.text
 
 
 class SearchResultItemLocators:
