@@ -1,3 +1,4 @@
+import services.numbers as numbers
 
 
 def test_search_for_js(start_web, manage_driver_and_cleanup):
@@ -33,5 +34,5 @@ def test_search_for_vuejs(start_web, manage_driver_and_cleanup):
     first_result = search_results.get_nth_result(0)
     assert first_result.title == "vuejs/vue", \
         "First result title should be `vuejs/vue`"
-    assert first_result.stars == "142k", \
+    assert numbers.human_format_to_num(first_result.stars) > 140000, \
         "Should fit stars amount"
