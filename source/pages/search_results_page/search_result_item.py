@@ -1,5 +1,6 @@
 import services.utils as utils
-from services.locator_creators import create_tag_locator
+import services.elements as elements
+from services.locator_creators import create_tag_locator, create_class_locator
 
 
 class SearchResultItem:
@@ -7,6 +8,7 @@ class SearchResultItem:
         self.__search_result_el = search_result_el
         self.__timeout = timeout
         self.__title_el = None
+        self.__stars_el = None
 
     @property
     def __title(self):
@@ -19,9 +21,24 @@ class SearchResultItem:
         return self.__title_el
 
     @property
+    def __stars(self):
+        if self.__stars_el is None:
+            star_svg_el = utils.find_element(
+                self.__search_result_el,
+                SearchResultItemLocators.OCTICON_STAR
+            )
+            self.__stars_el = elements.get_parent_of_el(star_svg_el)
+        return self.__stars_el
+
+    @property
     def title(self):
         return self.__title.text
+
+    @property
+    def stars(self):
+        return self.__stars.text
 
 
 class SearchResultItemLocators:
     TITLE = create_tag_locator("h3")
+    OCTICON_STAR = create_class_locator("octicon-star")
