@@ -1,7 +1,7 @@
 import services.numbers as numbers
 
 
-def test_search_for_js(start_web, manage_driver_and_cleanup):
+def test_search(start_web, manage_driver_and_cleanup):
     index_page = start_web
     search_results = index_page.search_for("javascript")
     assert search_results.results_len is not None,\
