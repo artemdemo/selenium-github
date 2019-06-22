@@ -33,6 +33,12 @@ class SearchResultsPage(GithubPage):
     def get_current_sort_option(self):
         return self.search_sort.get_sort_option()
 
+    def go_to_the_next_page(self):
+        self.pagination.click_on_next()
+        self.wait_to_load()
+        # time.sleep(1)
+        return SearchResultsPage(self.driver, self.timeout)
+
 
 class SearchResultsPageLocators:
     RESULTS_CONTAINER = create_class_locator("codesearch-results")

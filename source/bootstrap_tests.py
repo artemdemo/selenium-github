@@ -13,3 +13,9 @@ def test_search_for_js(start_web, manage_driver_and_cleanup):
     search_results = search_results.sort_by_most_stars()
     assert search_results.get_current_sort_option() == "Most stars",\
         "Results should be sorted by `Most stars`"
+
+    search_results = search_results.go_to_the_next_page()
+    assert search_results.is_first_page() is False, \
+        "Shouldn't be the first page"
+    assert search_results.get_results_len() == 10, \
+        "Should be shown 10 results"

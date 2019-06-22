@@ -56,6 +56,9 @@ class Pagination:
         first_is_current = elements.el_has_class(first_page_el, 'current')
         return prev_is_disabled and first_is_current
 
+    def click_on_next(self):
+        self.__next_page.click()
+
 
 class PaginationLocators:
     PAGINATION = create_class_locator("pagination")
