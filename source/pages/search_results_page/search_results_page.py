@@ -23,6 +23,12 @@ class SearchResultsPage(GithubPage):
     def get_nth_result(self, result_number):
         return self.search_results_list[result_number]
 
+    def open_nth_result(self, result_number):
+        result = self.search_results_list[result_number]
+        result.open_repo_page()
+        from source.pages.repo_page.repo_page import RepoPage
+        return RepoPage(self.driver, self.timeout)
+
     def is_first_page(self):
         return self.pagination.is_first_page()
 

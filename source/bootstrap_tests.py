@@ -36,3 +36,19 @@ def test_search_for_vuejs(start_web, manage_driver_and_cleanup):
         "First result title should be `vuejs/vue`"
     assert numbers.human_format_to_num(first_result.stars) > 140000, \
         "Should fit stars amount"
+
+
+def test_repo_page(start_web, manage_driver_and_cleanup):
+    index_page = start_web
+    search_results = index_page.search_for("facebook/react")
+
+    assert search_results.results_len == 10, \
+        "Should be shown 10 results"
+
+    first_result = search_results.get_nth_result(0)
+    assert first_result.title == "facebook/react", \
+        "First result title should be `facebook/react`"
+
+    repo_page = search_results.open_nth_result(0)
+    assert repo_page.title == "facebook/react", \
+        "First result page title should be `facebook/react`"

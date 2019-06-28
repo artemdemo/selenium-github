@@ -25,7 +25,7 @@ class SearchResultItem:
         if self.__stars_el is None:
             star_svg_el = utils.find_element(
                 self.__search_result_el,
-                SearchResultItemLocators.OCTICON_STAR
+                SearchResultItemLocators.OCTICON_STAR,
             )
             self.__stars_el = elements.get_parent_of_el(star_svg_el)
         return self.__stars_el
@@ -38,7 +38,15 @@ class SearchResultItem:
     def stars(self):
         return self.__stars.text
 
+    def open_repo_page(self):
+        title_link_el = utils.find_element(
+            self.__title,
+            SearchResultItemLocators.TITLE_LINK,
+        )
+        title_link_el.click()
+
 
 class SearchResultItemLocators:
     TITLE = create_tag_locator("h3")
+    TITLE_LINK = create_tag_locator("a")
     OCTICON_STAR = create_class_locator("octicon-star")
