@@ -3,8 +3,11 @@ from selenium import webdriver
 from configuration import *
 from pages.index_page.index_page import IndexPage
 from pages.github_page import GithubPage
+import time
+from datetime import datetime
 
 timeout = 5
+relevant_invocations = {'setup', 'call', 'teardown'}
 
 
 def initialize_driver(site_url):
@@ -42,3 +45,15 @@ def manage_driver_and_cleanup():
         pass
     finally:
         driver.quit()
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    # execute all other hooks to obtain the report object
+    outcome = yield
+    rep = outcome.get_result()
+    # set a report attribute for each phase of a call, which can
+    # be "setup", "call", "teardown"
+    if rep.when in relevant_invocations and rep.failed:
+        driver.save_screenshot(f"screenshot_{rep.nodeid}_{datetime.fromtimestamp(time.time())}.png".replace(" ", "_"))
+    setattr(item, "rep_" + rep.when, rep)
